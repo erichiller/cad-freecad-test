@@ -1,0 +1,26 @@
+{
+    "terminal.integrated.env.windows": {
+        "PYTHONPATH": "${env:PYTHONPATH};${workspaceFolder}\\typedef;C:\\Program Files\\FreeCAD 0.18\\lib;C:\\Program Files\\FreeCAD 0.18\\Mod"
+        // C:\\Program Files\\FreeCAD 0.18\\lib;C:\\Program Files\\FreeCAD 0.18\\bin;C:\\Program Files\\FreeCAD 0.18\\bin\\Lib;C:\\Program Files\\FreeCAD 0.18\\bin\\Lib\\site-packages;C:\\Program Files\\FreeCAD 0.18\\bin\\DLLs;C:\\Users\\eric\\AppData\\Roaming\\Python\\Python36\\Scripts"
+        ,
+        "PYTHON": "C:\\Program Files\\FreeCAD 0.18\\bin\\python.exe",
+        "PATH": "C:\\Program Files\\WindowsPowerShell\\Modules\\omega\\system\\git\\cmd;${workspaceFolder}\\types;C:\\Program Files\\WindowsPowerShell\\Modules\\omega\\bin;C:\\Program Files\\WindowsPowerShell\\Modules\\omega\\system\\nodejs;C:\\Program Files\\WindowsPowerShell\\Modules\\omega\\system\\vim;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0;C:\\WINDOWS\\System32\\OpenSSH;C:\\Program Files\\Microsoft VS Code\\bin;C:\\Program Files\\FreeCAD 0.18\\bin;C:\\Program Files\\FreeCAD 0.18\\Scripts;C:\\Program Files\\FreeCAD 0.18\\lib;C:\\Program Files\\FreeCAD 0.18\\Mod;C:\\Users\\eric\\AppData\\Roaming\\Python\\Python36\\Scripts",
+        "MYPYPATH": "${workspaceFolder}\\typedef;C:\\Program Files\\FreeCAD 0.18\\lib;C:\\Program Files\\FreeCAD 0.18"
+    },
+    // "python.pythonPath": "C:\\Users\\eric\\AppData\\Local\\Programs\\Python\\Python37\\python.exe"
+    "python.pythonPath": "C:\\Program Files\\FreeCAD 0.18\\bin\\python.exe"
+    ,
+    "python.linting.pylintArgs": [
+        "--init-hook",
+        "import sys; sys.path.insert(0, '${workspaceFolder}\\types'); sys.path.insert(0, 'C:/Program Files/FreeCAD 0.18/lib'); sys.path.insert(0, 'C:/Program Files/FreeCAD 0.18/Mod'); sys.path.insert(0, 'C:/Program Files/FreeCAD 0.18/bin')"
+    ]
+    ,
+    "python.linting.mypyArgs": [
+        // "--ignore-missing-imports",
+        // "--follow-imports=silent",
+        "--show-column-numbers",
+        // "--mypy-path=./types"
+    ],
+    // "python.autoComplete.typeshedPaths": [ "${workspaceFolder}\\types"],
+    "python.jediEnabled": false
+}

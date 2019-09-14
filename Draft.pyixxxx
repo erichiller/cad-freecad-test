@@ -1,0 +1,139 @@
+""" FreeCAD Draft Workbench API documentation
+
+https://www.freecadweb.org/wiki/Draft_API
+
+"""
+
+import FreeCAD
+import lib.Part as Part
+import lib.Drawing as Drawing
+import lib.Draft as Draft
+from typing import Optional
+from typing import NewType
+from typing import overload
+from typing import List
+from typing import Union
+from typing import Tuple
+
+degree = NewType('degree', float)
+path = NewType('path', str)
+
+
+
+def cut(obj1: FreeCAD.Object, obj2: FreeCAD.Object) -> FreeCAD.Object :
+    """Returns a cut object made from the difference of the 2 given objects. The original objects get hidden.
+    Eric
+    Returns: The newly created object"""
+    ...
+
+
+def extrude(obj: FreeCAD.Object, vector: FreeCAD.Vector) -> FreeCAD.Object :
+    """Extrudes the given object in the direction given by the vector. The original object gets hidden.
+    Returns: The newly created object"""
+
+
+def formatObject(obj1: FreeCAD.Object, obj2: Optional[FreeCAD.Object]) -> None:
+    """This function applies to the given target object the current properties set on the Draft toolbar (line color and line width), or copies the properties of a second object if provided. It also places the object in construction group if the construction button is pressed.
+    Returns: Nothing"""
+
+
+def fuse(obj: FreeCAD.Object, obj2: FreeCAD.Object) -> FreeCAD.Object :
+    """Returns an object made from the union of the 2 given objects. If the objects are coplanar, a special Draft Wire is used, otherwise the final object is a standard Part fuse.
+    Returns: The newly created object"""
+
+
+def getDraftPath(submodule: Optional[str]) -> path:
+    """Returns the user or system path where the Draft module is running from. If a subpath or a filename is supplied, the full path to the subpath inside the Draft module is returned.
+    Returns: A file path"""
+
+
+def getGroupContents(scan_list: List) -> List[FreeCAD.Object] :
+    """Scans recursively the given list for groups. If groups are encountered, their contents are appended to the list.
+    Returns: A list of FreeCAD Objects"""
+
+
+def getRealName(object_name: str) -> str:
+    """Strips the trailing numbers from an object name.
+    Returns: The stripped object name"""
+
+
+def getSelection( ) -> FreeCAD.Object :
+    """Returns the current FreeCAD selection.
+    Returns: The current FreeCAD selection."""
+
+
+def makeCircle(radius: float, placement: Optional[FreeCAD.placement], facemode: bool, startangle: degree, endangle: degree) -> FreeCAD.Object :
+    """Creates a circle object with given radius. If a placement is given, it is used. If facemode is False, the circle is shown as a wireframe, otherwise as a face. If start angle AND end angle are given (in degrees), they are used and the object appears as an arc.
+    Returns: The newly created object."""
+
+
+@overload
+def makeDimension(attach_obj: FreeCAD.Object, vertice1: int, vertice2: int, intersecting_vector: Optional[FreeCAD.Vector]) -> FreeCAD.Object:
+    ...
+@overload
+def makeDimension(vec1: FreeCAD.Vector, vec2: FreeCAD.Vector, intersecting_vector: Optional[FreeCAD.Vector]) -> FreeCAD.Object :
+    """Creates a Dimension object measuring distance between first and second vectors, with the dimension line passing through the third vector if provided. The current line width and color from the Draft toolbar will be used. Instead of 2 vectors, you can also pass a FreeCAD object, and two integers (and optionally a vector where the dimension line must pass). In that case, the dimension will be associated with the object, and measure two of its vertices, indicated by the two given indice numbers.
+    Returns: The newly created object."""
+
+
+def makeLine(vec1: FreeCAD.Vector, vec2: FreeCAD.Vector) -> FreeCAD.Object :
+    """Creates a line between the two given vectors. The current line width and color from the Draft toolbar will be used.
+    Returns: The newly created object."""
+
+
+def makeRectangle(length: float, width: float, placement: Optional[FreeCAD.placement], facemode: bool) -> FreeCAD.Object :
+    """Creates a Rectangle object with length in X direction and height in Y direction. If a placement is given, it is used. If facemode is False, the rectangle is shown as a wireframe, otherwise as a face. The current line width and color from the Draft toolbar will be used.
+    Returns: The newly created object."""
+
+
+def makeText(input: Union[str, list], vector: Optional[FreeCAD.Vector], screenmode: Optional[bool]) -> FreeCAD.Object :
+    """Creates a Text object, at the given point if a vector is provided, containing the string or the strings given in the list, one string by line. The current color from the Draft toolbar and the text height and font specified in preferences are used. If screenmode is True, the text always faces the view direction, otherwise it lies on the XY plane.
+    Returns: The newly created object."""
+
+
+def makeWire(source: Union[List[FreeCAD.Vector], Part.Wire], closed: Optional[bool], placement: Optional[FreeCAD.placement], facemode: Optional[bool]) -> Draft.DWire:
+    """Creates a DWire object from the given list of vectors or from the given Wire. If closed is True or if first and last points are identical, the wire is closed. If facemode is True (and wire is closed), the wire will appear filled. The current line width and color from the Draft toolbar will be used.
+    Returns: A new Draft DWire (not a Part Wire)."""
+
+
+def move(obj: Union[FreeCAD.Object, List[FreeCAD.Object]], Vector, copymode: Optional[bool]) -> List[FreeCAD.Object] :
+    """Moves the given object or the objects contained in the given list in the direction and distance indicated by the given vector. If copymode is True, the actual objects are not moved, but copies are created instead.
+    Returns: The object(s) (or their copies if copymode was True)."""
+
+
+def precision( ) -> int:
+    """Returns the precision value from Draft user settings.
+    Returns: An integer."""
+
+
+def rotate(obj: Union[FreeCAD.Object, List[FreeCAD.Object]], angle: degree, center: Optional[bool], axis: Optional[FreeCAD.Vector], copymode: Optional[bool]) -> List[FreeCAD.Object] :
+    """Rotates the given object or the objects contained in the given list with the given angle around the given center if provided, using axis as a rotation axis. If axis is omitted, the rotation will be around the vertical Z axis. If copymode is True, the actual objects are not moved, but copies are created instead.
+    Returns: The objects (or their copies)."""
+
+
+def scale(obj: Union[FreeCAD.Object, List[FreeCAD.Object]], vector: Optional[FreeCAD.Vector], center: Optional[bool], copymode: Optional[bool]) -> List[FreeCAD.Object]:
+    """Scales the given object or the objects contained in the given list with a scale factors defined by the given vector (in X, Y and Z directions) around the given center if provided. If copymode is True, the actual objects are not moved, but copies are created instead.
+    Returns: The objects (or their copies)."""
+
+
+def select(obj: FreeCAD.Object) -> None:
+    """Deselects everything and selects only the passed object
+    Returns: Nothing."""
+
+
+def shapify(obj: FreeCAD.Object) -> FreeCAD.Object :
+    """Transforms a parametric shape object into non-parametric.
+    Returns: The new object."""
+
+
+def draftify(obj: Union[FreeCAD.Object, List[FreeCAD.Object]]) -> None:
+    """Turns the given object or each object of the given list into Draft parametric wires.
+    Returns: Nothing."""
+
+
+SVGString = str
+Percent = float
+
+def getSVG(obj: FreeCAD.Object, linemodifier: Optional[Percent], textmodifier: Optional[str], planedef: Optional[Tuple[FreeCAD.Vector, FreeCAD.Vector]]) -> SVGString:
+    """Creates a SVG representation of the given object. The linemodifier attribute is a scale factor (in percents) for line width, and textmodifier for text size. You can also optionally provide a tuple of vectors to define a projection plane, otherwise the geometry will be projected on the XY plane.
+    Returns: a string containing a SVG representation of the given object."""
